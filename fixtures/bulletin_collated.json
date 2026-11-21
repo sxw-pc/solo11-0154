@@ -1,0 +1,10 @@
+{
+  "bulletins": [{"id":"BUL-1","batch":"WASTE-1","edition":1}],
+  "recipient_keys":["A","B","C"],
+  "reception_constraints":[
+    {"edition":1,"recipients":["A","B"],"received_count":1},
+    {"edition":1,"recipients":["B","C"],"received_count":1}
+  ],
+  "authorized_neutral_group":["A","B","C"],
+  "requires_receipt_to_view_replacement_detail":["A","B","C"]
+}
