@@ -1,0 +1,17 @@
+{
+  "attestations": [
+    {
+      "id": "ILK-BYPASS",
+      "device_id": "STATION-1",
+      "component_id": "BOX-B",
+      "batch": "WASTE-1",
+      "ticket_id": "TICKET-GUARD-DBG",
+      "lock_engaged": true,
+      "binding_continuous": true,
+      "run_confirmed": true,
+      "released_at_removal": true,
+      "bypass_state": "unknown",
+      "run_at": null
+    }
+  ]
+}

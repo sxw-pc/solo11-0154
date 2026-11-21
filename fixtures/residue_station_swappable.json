@@ -1,0 +1,8 @@
+{
+  "frames": [
+    {"id": "FRM2-L", "event_id": "EV2-L", "ticket_id": "TICKET-S2", "device_id": "STATION-2", "component_id": "BOX-D", "batch": "WASTE-1", "kind": "load", "seq": 1, "at": "2026-01-12T08:00:00Z", "witness": "station_officer"},
+    {"id": "FRM2-C1", "event_id": "EV2-C", "ticket_id": "TICKET-S2", "device_id": "STATION-2", "component_id": "BOX-D", "batch": "WASTE-1", "kind": "continuation", "seq": 2, "witness": "station_officer"},
+    {"id": "FRM2-E", "event_id": "EV2-E", "ticket_id": "TICKET-S2", "device_id": "STATION-2", "component_id": "BOX-D", "batch": "WASTE-1", "kind": "exit", "seq": 3, "witness": "station_officer"},
+    {"id": "FRM2-P", "event_id": "EV2-P", "ticket_id": "TICKET-RUN", "device_id": "STATION-2", "component_id": "BOX-D", "batch": "WASTE-1", "kind": "run", "seq": 1, "at": "2026-01-12T08:30:00Z", "witness": null, "source": "independent_output"}
+  ]
+}
