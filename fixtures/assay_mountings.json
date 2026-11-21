@@ -1,0 +1,16 @@
+{
+  "batch": "WASTE-1",
+  "limit": 4,
+  "cell_keys": ["A", "B", "C"],
+  "provisional_cells": [
+    {"tray_mark":"L", "signal":2},
+    {"tray_mark":"R", "signal":6},
+    {"tray_mark":"C", "signal_range":[3,5]}
+  ],
+  "compatible_mountings": [
+    {"L":"A","R":"B","C":"C"},
+    {"L":"B","R":"A","C":"C"}
+  ],
+  "required_reserve_units": 1,
+  "untouched_reserve_units": 1
+}
