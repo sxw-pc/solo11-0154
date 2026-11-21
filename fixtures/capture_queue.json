@@ -1,0 +1,44 @@
+{
+  "requests": [
+    {
+      "id": "EARLY",
+      "batch": "WASTE-1",
+      "fragments": 1,
+      "expires_tick": 1
+    },
+    {
+      "id": "PAIR",
+      "batch": "WASTE-1",
+      "fragments": 2,
+      "expires_tick": 2
+    }
+  ],
+  "fragment_case": [
+    {
+      "id": "EARLY-BODY",
+      "packet": "EARLY",
+      "weight": 1,
+      "available_ticks": [
+        0
+      ]
+    },
+    {
+      "id": "PAIR-RAW",
+      "packet": "PAIR",
+      "weight": 4,
+      "available_ticks": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "PAIR-SIGN",
+      "packet": "PAIR",
+      "weight": 4,
+      "available_ticks": [
+        0,
+        1
+      ]
+    }
+  ]
+}
