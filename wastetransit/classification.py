@@ -14,6 +14,11 @@ def decide(db,batch):
     elif b['container_class']!=top['container_class'] or top['created_at']>top['storage_until']:state,reason='storage_invalid','container incompatible or storage expired'
     elif b['declared_kg']<=0:state,reason='invalid_weight','batch net weight must be positive'
     else:state,reason='classified','authorized code, container and storage accepted'
+    if state=='classified' and db.execute('SELECT 1 FROM assay_requirement WHERE profile_id=?',(top['id'],)).fetchone():
+        con=db.execute('SELECT state FROM assay_conclusion WHERE batch=?',(batch,)).fetchone()
+        if con and con['state']=='verified':reason='authorized code, container, storage and retained-assay evidence accepted'
+        elif con and con['state']=='review':state,reason='assay_review','retained-sample reading above sign-off threshold assigned to review class'
+        else:state,reason='assay_hold','retained-sample assay evidence incomplete for declared requirement'
     old=db.execute('SELECT * FROM classification WHERE batch=?',(batch,)).fetchone()
     if not old or (old['state'],old['reason'],old['profile_id'])!=(state,reason,top['id']):
         ver=old['version']+1 if old else 1
@@ -26,7 +31,9 @@ def import_data(db,data):
     touched=set()
     with db:
         for p in data.get('profiles',[]):
-            if record(db,'profile',p):db.execute('INSERT INTO waste_profile VALUES(?,?,?,?,?,?,?,?,?,?)',(p['id'],p['batch'],p['version'],p['code'],p['hazard'],p['container_class'],p['created_at'],p['storage_until'],p['issued_by'],int(p.get('withdrawn',False))))
+            if record(db,'profile',p):
+                db.execute('INSERT INTO waste_profile VALUES(?,?,?,?,?,?,?,?,?,?)',(p['id'],p['batch'],p['version'],p['code'],p['hazard'],p['container_class'],p['created_at'],p['storage_until'],p['issued_by'],int(p.get('withdrawn',False))))
+                if p.get('assay_required'):db.execute('INSERT OR IGNORE INTO assay_requirement VALUES(?,?)',(p['id'],p['batch']))
             touched.add(p['batch'])
         for b in data.get('batches',[]):
             if record(db,'batch',b):db.execute('INSERT INTO waste_batch VALUES(?,?,?,?,?)',(b['id'],b['owner'],b['declared_kg'],b['container_class'],b['classification_id']))

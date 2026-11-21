@@ -16,6 +16,13 @@ CREATE TABLE IF NOT EXISTS closure(batch TEXT PRIMARY KEY,state TEXT NOT NULL,re
 CREATE TABLE IF NOT EXISTS investigation(id TEXT PRIMARY KEY,batch TEXT NOT NULL,at TEXT NOT NULL,source TEXT NOT NULL,reason TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS future_dispatch_hold(batch TEXT PRIMARY KEY,state TEXT NOT NULL,reason TEXT NOT NULL,closure_version INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS decision_history(id INTEGER PRIMARY KEY,subsystem TEXT NOT NULL,batch TEXT NOT NULL,state TEXT NOT NULL,reason TEXT NOT NULL,source_id TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS assay_requirement(profile_id TEXT PRIMARY KEY,batch TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS assay_screening(batch TEXT PRIMARY KEY,signoff_limit REAL NOT NULL,payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS assay_commission(id TEXT PRIMARY KEY,batch TEXT NOT NULL,window TEXT NOT NULL,route TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS assay_resource(id TEXT PRIMARY KEY,window TEXT NOT NULL,reader_available INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS assay_action(id TEXT PRIMARY KEY,batch TEXT NOT NULL,window TEXT NOT NULL,kind TEXT NOT NULL,payload TEXT NOT NULL,effective INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS reference_sample(id TEXT PRIMARY KEY,state TEXT NOT NULL,holder TEXT,version INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS assay_conclusion(batch TEXT PRIMARY KEY,state TEXT NOT NULL,reason TEXT NOT NULL,cells TEXT NOT NULL,orientation TEXT,reserve_untouched INTEGER NOT NULL,evidence TEXT NOT NULL,version INTEGER NOT NULL);
 """
 def connect(path):
     db=sqlite3.connect(path);db.row_factory=sqlite3.Row;db.executescript(SCHEMA);return db
