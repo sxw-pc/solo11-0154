@@ -1,0 +1,31 @@
+{
+  "permits": [
+    {
+      "id": "VP-B",
+      "vehicle": "TRUCK-B",
+      "driver": "DRIVER-B",
+      "code": "HW08",
+      "start": "2026-01-01",
+      "end": "2026-02-01",
+      "route": "A-B"
+    }
+  ],
+  "manifests": [
+    {
+      "id": "MAN-B",
+      "batch": "WASTE-1",
+      "vehicle": "TRUCK-B",
+      "permit_id": "VP-B",
+      "route": "A-C",
+      "depart_at": "2026-01-10",
+      "arrive_at": "2026-01-11",
+      "out_kg": 1000,
+      "producer_sign": "producer",
+      "carrier_sign": "carrier"
+    }
+  ],
+  "handoffs": [
+    {"id":"HB-1","manifest_id":"MAN-B","kind":"departure","at":"2026-01-10","signer":"producer"},
+    {"id":"HB-2","manifest_id":"MAN-B","kind":"arrival","at":"2026-01-11","signer":"carrier"}
+  ]
+}

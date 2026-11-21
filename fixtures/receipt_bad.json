@@ -1,0 +1,24 @@
+{
+  "receiver_permits": [
+    {
+      "id": "RP-B",
+      "receiver": "RECEIVER-B",
+      "code": "HW08",
+      "method": "incineration",
+      "start": "2026-01-01",
+      "end": "2026-02-01"
+    }
+  ],
+  "weights": [
+    {
+      "id": "WEIGH-B",
+      "batch": "WASTE-1",
+      "receiver_id": "RECEIVER-B",
+      "permit_id": "RP-B",
+      "at": "2026-01-12",
+      "net_kg": 940,
+      "scale_witness": "receiver",
+      "kind": "first"
+    }
+  ]
+}

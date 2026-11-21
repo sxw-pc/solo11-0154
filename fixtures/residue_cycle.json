@@ -1,0 +1,5 @@
+{
+  "summaries":[{"id":"RESIDUE-C1","batch":"WASTE-1","completed_count":1}],
+  "controller_unordered_counts":{"loaded":1,"cycle":1,"removed":1},
+  "receipt_restrictions":{"requires_intact_cycle_proof":true,"accepts_guarded_controller":true}
+}
