@@ -2,12 +2,13 @@ import argparse,json
 from pathlib import Path
 from .store import connect
 from .source import read,file_record
-from . import classification,transport,closure,report
-HANDLERS={'waste-import':classification.import_data,'manifest-import':transport.import_data,'receipt-import':closure.import_data}
+from . import classification,transport,closure,report,incident_notice
+HANDLERS={'waste-import':classification.import_data,'manifest-import':transport.import_data,'receipt-import':closure.import_data,'reception-import':incident_notice.import_data,'authorize-correction':incident_notice.register_authorization,'issue-correction':incident_notice.issue_correction,'record-readback':incident_notice.record_readback,'record-occupation':incident_notice.record_occupation}
 def main():
-    p=argparse.ArgumentParser();p.add_argument('command',choices=[*HANDLERS,'demo','report','audit']);p.add_argument('--db',default='state.sqlite');p.add_argument('--input');a=p.parse_args();db=connect(a.db)
+    p=argparse.ArgumentParser();p.add_argument('command',choices=[*HANDLERS,'demo','report','audit','reception-query']);p.add_argument('--db',default='state.sqlite');p.add_argument('--input');p.add_argument('--batch');a=p.parse_args();db=connect(a.db)
     if a.command=='report':print(json.dumps(report.build(db),ensure_ascii=False,indent=2));return
     if a.command=='audit':print(json.dumps(report.audit(db),ensure_ascii=False,indent=2));return
+    if a.command=='reception-query':print(json.dumps(incident_notice.reception_query(db,a.batch),ensure_ascii=False,indent=2));return
     if a.command=='demo':
         for cmd,name in [('waste-import','waste_ok.json'),('manifest-import','manifest_ok.json'),('receipt-import','receipt_ok.json')]:
             doc,raw=read(Path(__file__).resolve().parents[1]/'fixtures'/name);HANDLERS[cmd](db,doc)
